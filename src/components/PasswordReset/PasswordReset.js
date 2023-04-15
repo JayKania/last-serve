@@ -1,3 +1,4 @@
+//Created by Viraj Joshi
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
@@ -44,7 +45,7 @@ function PasswordReset() {
   const handleOnClick = async (e) => {
     e.preventDefault();
     try {
-      const result = await axios.get('http://localhost:5000/users/resetkey/' + email);
+      const result = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/users/resetKey` + email);
       if (result.status === 200) {
         setipWrapDisable('input-wrapper');
         setNewPasBtn('newpass-btn');
@@ -59,7 +60,7 @@ function PasswordReset() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const result = await axios.post('http://localhost:5000/users/verifyKey', { email: email, resetKey: resetKey });
+      const result = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/users/verifyKey`, { email: email, resetKey: resetKey });
       if (result.status === 200) {
         window.localStorage.setItem('resetEmail', email);
         navigate('/newPassword');
@@ -75,7 +76,7 @@ function PasswordReset() {
 
   const emailExists = async () => {
     try {
-      const result = await axios.post('http://localhost:5000/users/checkEmail', { email: email });
+      const result = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/users/checkEmail`, { email: email });
       if (result.status === 200) {
         return false;
       }

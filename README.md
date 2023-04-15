@@ -1,21 +1,19 @@
-
 # LastServe
 
 Restaurants that have leftover food will update their public posting on our website each night with how much food is still available. Anyone in need of food can do so by setting up a time slot and coming to pick up their meal for that evening. By doing this, food waste in restaurants will be reduced and people won't go to bed hungry.
 
-* *Date Created*: 25 Feb 2023
-* *Last Modification Date*: 28 Feb 2023
-* *Git URL*: https://git.cs.dal.ca/ribadiya/csci_5709_web_group6.git
-* *Deployed Project URL*: https://last-serve.netlify.app/
+- _Date Created_: 25 Feb 2023
+- _Last Modification Date_: 28 Feb 2023
+- _Git URL_: https://git.cs.dal.ca/ribadiya/csci_5709_web_group6.git
+- _Deployed Project URL_: https://lastserve-a3.netlify.app/
 
 ## Authors
 
-* [Arpit Ribadiya](ar304626@dal.ca) - *(Full Stack Developer)*
-* [Jay Kania](jy440982@dal.ca) - *(Full Stack Developer)*
-* [Lav Patel](lv842182@dal.ca) - *(Full Stack Developer)*
-* [Neha Karkhanis](nh601176@dal.ca) - *(Full Stack Developer)*
-* [Viraj Joshi](viraj.joshi@dal.ca) - *(Full Stack Developer)*
-
+- [Arpit Ribadiya](ar304626@dal.ca) - _(Full Stack Developer)_
+- [Jay Kania](jy440982@dal.ca) - _(Full Stack Developer)_
+- [Lav Patel](lv842182@dal.ca) - _(Full Stack Developer)_
+- [Neha Karkhanis](nh601176@dal.ca) - _(Full Stack Developer)_
+- [Viraj Joshi](viraj.joshi@dal.ca) - _(Full Stack Developer)_
 
 ## Getting Started
 
@@ -24,7 +22,7 @@ Restaurants that have leftover food will update their public posting on our webs
 To have a local copy of this project up and running on your local machine, you will first need to install the following software / libraries / plug-ins
 
 ```
-1. To install all required package and dependecncy in local run below commnad:- 
+1. To install all required package and dependecncy in local run below commnad:-
 npm install
 
 2. To start project in local run below commnad:-
@@ -42,19 +40,19 @@ password = "12345678"
 
 ## Built With
 
-* [Reactjs](https://reactjs.org/) - The web framework used.
-* [npm](https://www.npmjs.com/) - Dependency Management.
-* [Visual Studio Code](https://code.visualstudio.com/) - Source-code editor.
-* [GitLab](https://about.gitlab.com/) - Source Code Repository
-* [Netlify](https://app.netlify.com/) - Online Platform used for web application deployment.
-* [Toastify](https://www.npmjs.com/package/react-toastify) -react library to display short livedalerts on web pages.
-* [react datatables](https://react-data-table-component.netlify.app/?path=/story/getting-started-intro--page) -react library to display data in tables format.
+- [Reactjs](https://reactjs.org/) - The web framework used.
+- [npm](https://www.npmjs.com/) - Dependency Management.
+- [Visual Studio Code](https://code.visualstudio.com/) - Source-code editor.
+- [GitLab](https://about.gitlab.com/) - Source Code Repository
+- [Netlify](https://app.netlify.com/) - Online Platform used for web application deployment.
+- [Toastify](https://www.npmjs.com/package/react-toastify) -react library to display short livedalerts on web pages.
+- [react datatables](https://react-data-table-component.netlify.app/?path=/story/getting-started-intro--page) -react library to display data in tables format.
 
 ## Sources Used
 
 ### SignupRestaurant.js
 
-*Lines 31, 157
+\*Lines 31, 157
 
 ```
 const navigate = useNavigate();
@@ -62,7 +60,7 @@ navigate('/approvalPending');
 
 ```
 
-The code above was created by adapting the code in [bobbyhadz](https://bobbyhadz.com/blog/react-redirect-after-form-submit) as shown below: 
+The code above was created by adapting the code in [bobbyhadz](https://bobbyhadz.com/blog/react-redirect-after-form-submit) as shown below:
 
 ```
 const navigate = useNavigate();
@@ -78,11 +76,9 @@ const handleSubmit = event => {
 
 The code in [bobbyhadz](https://bobbyhadz.com/blog/react-redirect-after-form-submit) was implemented to route user to contacts page when he submit form. The code was used because somewhat similar requirement was there like on submitting form wanted to redirect user on other page. The code was modified by just using required navigate function with actual page routing which was ApprovalPending page in our case.
 
-
-
 ### App.js
 
-*Lines 27 - 29*
+_Lines 27 - 29_
 
 ```
 <BrowserRouter>
@@ -93,7 +89,7 @@ The code in [bobbyhadz](https://bobbyhadz.com/blog/react-redirect-after-form-sub
 
 ```
 
-The code above was created by adapting the code in [dev](https://dev.to/emmanuelthecoder/getting-started-with-react-router-19de) as shown below: 
+The code above was created by adapting the code in [dev](https://dev.to/emmanuelthecoder/getting-started-with-react-router-19de) as shown below:
 
 ```
 <BrowserRouter>
@@ -111,7 +107,7 @@ The code in [dev](https://dev.to/emmanuelthecoder/getting-started-with-react-rou
 
 ### src/components/RestaurantVolunteer/RestaurantVolunteer.jsx
 
-*Lines 136 - 142*
+_Lines 136 - 142_
 
 ```
     <div class="dashboard-content">
@@ -125,7 +121,7 @@ The code in [dev](https://dev.to/emmanuelthecoder/getting-started-with-react-rou
 
 ```
 
-The code above was created by adapting the code in [React Datatable documentation ](https://jbetancur.github.io/react-data-table-component/?path=/docs/pagination-basic--basic&globals=outline:true) as shown below: 
+The code above was created by adapting the code in [React Datatable documentation ](https://jbetancur.github.io/react-data-table-component/?path=/docs/pagination-basic--basic&globals=outline:true) as shown below:
 
 ```
 
@@ -137,5 +133,3 @@ The code above was created by adapting the code in [React Datatable documentatio
 - <!---How---> The code in [React Datatable documentation ](https://jbetancur.github.io/react-data-table-component/?path=/docs/pagination-basic--basic&globals=outline:true) was implemented by jbetancur
 - <!---Why---> [React Datatable documentation ](https://jbetancur.github.io/react-data-table-component/?path=/docs/pagination-basic--basic&globals=outline:true)'s Code was used to use the library and create the pagination in the tables used
 - <!---How---> [React Datatable documentation ](https://jbetancur.github.io/react-data-table-component/?path=/docs/pagination-basic--basic&globals=outline:true) Code was modified by using different Data and columns and using the tags separately rather than a function.
-
-

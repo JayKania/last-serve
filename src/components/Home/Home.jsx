@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import home_img from "../../assets/home.jpg";
 import appointment_img from "../../assets/appointment.jpg";
@@ -9,13 +9,28 @@ import res_img3 from "../../assets/res_img3.jpg";
 import res_img4 from "../../assets/res_img4.jpg";
 import res_img5 from "../../assets/res_img5.jpg";
 import res_img6 from "../../assets/res_img6.jpg";
+
 import Navbar from "../Navigation/Navbar";
-import Footer from "../Footer/Footer"
+import Footer from "../Footer/Footer";
+import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
+import MobileNavbar from "../Navigation/MobileNavbar";
 
 const Home = () => {
+  const navigate = useNavigate();
+  const [isVisible, setIsVisible] = useState(false);
   return (
     <StyledHome className="home">
-      <Navbar />
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Last serve - Lets end hunger</title>
+        <description>
+          website aimed at minimizing food wastage of restaurant by donating it
+          to the needy
+        </description>
+      </Helmet>
+      <Navbar setIsVisible={setIsVisible} />
+      {isVisible ? <MobileNavbar setIsVisible={setIsVisible} /> : null}
       <StyledSectionOne className="section-1">
         <div className="section-details">
           <h1>Last Serve</h1>
@@ -30,46 +45,47 @@ const Home = () => {
           <h4>
             Are you a restaurant that has to throw away cooked food daily?
           </h4>
-          <button>Register Today</button>
+          <button onClick={() => navigate("/restaurantLogin")}>
+            Register Today
+          </button>
         </div>
         <div className="section-body-wrapper">
           <div className="section-content">
-            <h5>Create Posts Daily to donate food in seconds</h5>
+            <h5>Create posts daily to donate food in seconds</h5>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda
-              ducimus aliquam praesentium! Quae libero cumque dolor corporis
-              adipisci ipsum eligendi praesentium facere? Dicta explicabo
-              necessitatibus sunt aut vel doloribus? Cumque.
+              By creating daily content and promoting food donation programs or
+              charities through the platform, the goal is to raise awareness and
+              create a sense of urgency around contributing to the cause.
             </p>
             <button>Learn more</button>
           </div>
           <div className="section-content">
-            <h5>Get help from our Volunteers on our platform</h5>
+            <h5>Get help from our volunteers on our platform</h5>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda
-              ducimus aliquam praesentium! Quae libero cumque dolor corporis
-              adipisci ipsum eligendi praesentium facere? Dicta explicabo
-              necessitatibus sunt aut vel doloribus? Cumque.
+              Get additional support and resources that would help you in tasks
+              like food preparation, serving meals, cleaning up, and interacting
+              with guests. By harnessing the power of volunteerism, communities
+              can come together to help those in need and promote a sense of
+              connection and solidarity.
             </p>
             <button>Learn more</button>
           </div>
           <div className="section-content">
-            <h5>Manage the orders via Dashboard</h5>
+            <h5>Manage the orders via dashboard</h5>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda
-              ducimus aliquam praesentium! Quae libero cumque dolor corporis
-              adipisci ipsum eligendi praesentium facere? Dicta explicabo
-              necessitatibus sunt aut vel doloribus? Cumque.
+              The idea is to provide a centralized location where orders can be
+              tracked and managed easily. This could include viewing orders,
+              updating order statuses, generating reports, and communicating
+              with customers.
             </p>
             <button>Learn more</button>
           </div>
           <div className="section-content">
-            <h5>Tempor incididunt</h5>
+            <h5>Subscribe to restaurants</h5>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda
-              ducimus aliquam praesentium! Quae libero cumque dolor corporis
-              adipisci ipsum eligendi praesentium facere? Dicta explicabo
-              necessitatibus sunt aut vel doloribus? Cumque.
+              By subscribing, users can receive notification whenever a
+              restaurant creates a new post about free food that would otherwise
+              be thrown away.
             </p>
             <button>Learn more</button>
           </div>
@@ -78,18 +94,19 @@ const Home = () => {
       <StyledSectionThree className="section-3">
         <div className="section-header-wrapper">
           <h4>We are bulding a better community by feeding the hungry.</h4>
-          <button>Join Our Community</button>
+          <button onClick={() => navigate("/login")}>Join Our Community</button>
         </div>
         <div className="section-body-wrapper">
           <div className="section-body-img">
             <img src={appointment_img} alt="appointment_img" />
           </div>
           <div className="section-body-content">
-            <h5>Scedule appointments and pickup leftover food</h5>
+            <h5>Schedule appointments and pickup leftover food</h5>
             <p>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro,
-              non aliquid accusantium architecto dolores dolore a quas commodi
-              eos. Ipsam totam consequatur rerum asperiores laborum.
+              By providing a convenient and easy-to-use system for scheduling
+              pickups, more organizations and individuals may be willing to
+              donate their surplus food, ultimately benefiting the community and
+              reducing food waste.
             </p>
           </div>
         </div>
@@ -97,9 +114,10 @@ const Home = () => {
           <div className="section-body-content">
             <h5>Filter restaurants based on zipcode and food preference.</h5>
             <p>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro,
-              non aliquid accusantium architecto dolores dolore a quas commodi
-              eos. Ipsam totam consequatur rerum asperiores laborum.
+              By using filters based on zip code and food preference, users can
+              quickly and efficiently narrow down their options, saving time and
+              potentially discovering new dining options they may not have
+              otherwise considered.
             </p>
           </div>
           <div className="section-body-img">

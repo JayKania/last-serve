@@ -1,13 +1,79 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Sidebar from "../Sidebar/Sidebar";
 import { AiOutlineSearch } from "react-icons/ai";
 import RestaurantCard from "./RestaurantCard";
+import axios from "axios";
+import ProfileNavbar from "../Landing/ProfileNavbar";
+import MobileSidebar from "../Sidebar/MobileSidebar";
 
 const Subscription = () => {
+  const [restaurants, setRestaurants] = useState([]);
+  const [subscribedRestaurants, setSubscribedRestaurants] = useState([]);
+  const [resInput, setResInput] = useState("");
+  const [searchedRestaurants, setSearchedRestaurants] = useState([]);
+  const [profileMenu, setProfileMenu] = useState(false);
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        // get all restaurants
+        const result = await axios.get(
+          process.env.REACT_APP_BACKEND_URL + "/restaurants"
+        );
+        // check what restaurants has user subscribed to
+        const res = await axios.post(
+          process.env.REACT_APP_BACKEND_URL + "/subscription/restaurants",
+          {
+            email: window.localStorage.getItem("email"),
+          }
+        );
+        setSubscribedRestaurants([...res.data.subscribed_restaurants]);
+        setRestaurants([...result.data.restaurants]);
+      } catch (err) {}
+    };
+    getData();
+  }, []);
+
+  const searchHandler = (event) => {
+    const value = event.target.value;
+    setResInput(value);
+    const filteredRestaurants = restaurants.filter((res) => {
+      return res.name.toLowerCase().includes(value.toLowerCase());
+    });
+    setSearchedRestaurants([...filteredRestaurants]);
+  };
+
+  const restaurantsHtml = restaurants?.map((res) => {
+    const isSubscribed = subscribedRestaurants?.find((data) => {
+      return data === res._id;
+    });
+    return (
+      <RestaurantCard
+        data={res}
+        key={res._id}
+        subscribed={isSubscribed ? true : false}
+      />
+    );
+  });
+
+  const searchedRestaurantsHtml = searchedRestaurants.map((res) => {
+    const isSubscribed = subscribedRestaurants?.find((data) => {
+      return data === res._id;
+    });
+    return (
+      <RestaurantCard
+        data={res}
+        key={res._id}
+        subscribed={isSubscribed ? true : false}
+      />
+    );
+  });
   return (
     <StyledSubscription>
       <Sidebar activeRoute="explore" />
+      <ProfileNavbar setProfileMenu={setProfileMenu} />
+      {profileMenu ? <MobileSidebar setProfileMenu={setProfileMenu} /> : null}
       <StyledSection>
         <div className="input-wrapper">
           <div className="logo-wrapper">
@@ -18,16 +84,18 @@ const Subscription = () => {
             name="restaurant"
             id="restaurant"
             placeholder="Search"
+            value={resInput}
+            onChange={searchHandler}
           />
         </div>
         <div className="restaurant-wrapper">
-          <RestaurantCard />
-          <RestaurantCard />
-          <RestaurantCard />
-          <RestaurantCard />
-          <RestaurantCard />
-          <RestaurantCard />
-          <RestaurantCard />
+          {resInput && searchedRestaurants.length === 0 ? (
+            <h4 className="no-user-err">No such restaurant exists!</h4>
+          ) : searchedRestaurants.length !== 0 ? (
+            searchedRestaurantsHtml
+          ) : (
+            restaurantsHtml
+          )}
         </div>
       </StyledSection>
     </StyledSubscription>
@@ -73,6 +141,11 @@ const StyledSection = styled.section`
     display: flex;
     flex-direction: column;
     gap: 2rem;
+  }
+  @media only screen and (min-width: 280px) and (max-width: 432px) {
+    width: 100%;
+    margin: 0;
+    padding: 2rem;
   }
 `;
 

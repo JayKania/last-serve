@@ -1,9 +1,11 @@
+//Created by Viraj Joshi
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import login_img from "../../assets/login.jpg";
 import Footer from "../Footer/Footer";
-import axios from 'axios';
+import axios from "axios";
+import { Navbar } from "react-bootstrap";
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -11,7 +13,6 @@ function Login() {
 
   const [authError, setAuthError] = useState("");
   const navigate = useNavigate();
-
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -26,22 +27,22 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const result = await axios.post('http://localhost:5000/users/login', { email: username, password: password });
+      const result = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/users/login`,
+        { email: username, password: password }
+      );
       if (result.status === 200) {
-        navigate('/home');
+        navigate("/home");
         window.localStorage.setItem("email", username);
-      }
-      else if ("xyz@gmail.com" === username && "12345678" === password) {
-        navigate('/restaurantSideBar');
       }
     } catch (error) {
       if (error.response.status === 403) {
-        setUsername('');
-        setPassword('');
+        setUsername("");
+        setPassword("");
         setAuthError("Invalid Username and Password");
       } else {
-        setUsername('');
-        setPassword('');
+        setUsername("");
+        setPassword("");
         console.error(error);
       }
     }
@@ -73,22 +74,12 @@ function Login() {
               placeholder="Password"
             ></input>
           </div>
-          <div className="login-type-wrapper">
-            <div className="radio-input-wrapper">
-              <input type="radio" name="login-type" id="login-user" />
-              <label htmlFor="login-user">User login</label>
-            </div>
-            <div className="radio-input-wrapper">
-              <input type="radio" name="login-type" id="login-restaurant" />
-              <label htmlFor="login-restaurant">Restaurant login</label>
-            </div>
+          <div className="action-links">
+            <Link to="/passwordReset">Reset Password</Link>
+            <Link to="/restaurantLogin">Restaurant login</Link>
           </div>
           <button className="login-btn">Login</button>
-          <div className="err">
-            {<span className='err'>{authError}</span>}
-          </div>
-          <Link to="/passwordReset">Reset Password</Link>
-          <Link to="/restaurantLogin">Login Restaurant</Link>
+          <div className="err">{<span className="err">{authError}</span>}</div>
         </StyledLogin>
         <StyledLoginImg className="login-img">
           <img src={login_img} alt="login_img" />
@@ -106,6 +97,17 @@ const StyledLoginImgWrapper = styled.div`
   border-radius: 5px;
   margin: 5rem auto;
   padding: 4rem;
+  @media only screen and (min-width: 280px) and (max-width: 432px) {
+    width: 100%;
+    margin-top: 2rem;
+    padding: 4rem 1rem 0 1rem;
+    box-shadow: none;
+  }
+  @media only screen and (min-width: 433px) and (max-width: 1110px) {
+    width: 80%;
+    margin-top: 15rem;
+    padding: 4rem 1rem 0 1rem;
+  }
 `;
 
 const StyledLogin = styled.form`
@@ -119,7 +121,6 @@ const StyledLogin = styled.form`
     font-size: 2rem;
     flex-direction: column;
     gap: 1rem;
-    padding: 1rem;
     input {
       padding: 1rem;
       outline: none;
@@ -128,11 +129,11 @@ const StyledLogin = styled.form`
       border-radius: 5px;
     }
   }
-  a{
+  a {
     text-decoration: none;
     font-size: 1.5rem;
     text-align: center;
-    color:  rgb(0, 127, 255);
+    color: rgb(0, 127, 255);
   }
   button {
     background-color: rgb(0, 127, 255);
@@ -162,11 +163,18 @@ const StyledLogin = styled.form`
       }
     }
   }
-  .err{
+  .action-links {
+    display: flex;
+    justify-content: space-between;
+  }
+  .err {
     padding: 0rem;
     color: red;
     font-size: small;
     text-align: center;
+  }
+  @media only screen and (min-width: 280px) and (max-width: 432px) {
+    flex-basis: 100%;
   }
 `;
 
@@ -176,6 +184,9 @@ const StyledLoginImg = styled.div`
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+  @media only screen and (min-width: 280px) and (max-width: 432px) {
+    flex-basis: 0;
   }
 `;
 

@@ -1,16 +1,14 @@
+//Updated by Viraj Joshi
+
 import React from "react";
-import {
-  AiOutlineCalendar,
-  AiOutlineHome,
-  AiOutlineSearch,
-} from "react-icons/ai";
+import { AiOutlineHome, AiOutlineSearch } from "react-icons/ai";
 import { BiUser } from "react-icons/bi";
-import { IoNotificationsOutline } from "react-icons/io5";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import app_logo from "../../assets/app_logo.jpg";
-import { Link } from "react-router-dom";
+import app_logo from "../../assets/logo-black.png";
 
 const Sidebar = ({ activeRoute }) => {
+  const navigate = useNavigate();
   return (
     <StyledSideabar>
       <div className="logo-wrapper">
@@ -24,27 +22,17 @@ const Sidebar = ({ activeRoute }) => {
           <Link to="/home">Home</Link>
         </div>
         <div
-          className={`link-wrapper ${activeRoute === "explore" ? "active" : ""
-            }`}
+          className={`link-wrapper ${
+            activeRoute === "explore" ? "active" : ""
+          }`}
         >
           <AiOutlineSearch />
           <Link to="/restaurants">Explore</Link>
         </div>
         <div
-          className={`link-wrapper ${activeRoute === "notifications" ? "active" : ""
-            }`}
+          className={`link-wrapper profile-wrapper`}
+          onClick={() => navigate("/profile")}
         >
-          <IoNotificationsOutline />
-          <Link to="/notifications">Notifications</Link>
-        </div>
-        <div
-          className={`link-wrapper ${activeRoute === "appointments" ? "active" : ""
-            }`}
-        >
-          <AiOutlineCalendar />
-          <Link to="/appointments">Appointments</Link>
-        </div>
-        <div className={`link-wrapper profile-wrapper`}>
           <BiUser />
           <Link to="/profile">Profile</Link>
         </div>
@@ -116,6 +104,13 @@ const StyledSideabar = styled.div`
         color: white;
       }
     }
+  }
+  @media only screen and (min-width: 280px) and (max-width: 432px) {
+    display: none;
+  }
+  @media only screen and (min-width: 433px) and (max-width: 1110px) {
+    margin-left: 5%;
+    width: fit-content;
   }
 `;
 
